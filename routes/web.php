@@ -1,7 +1,10 @@
 <?php
-namespace App\Http\Middleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UKMController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\DashboardController;
 
 /*
@@ -23,4 +26,9 @@ Route::get('/login', [AdminController::class, 'index']);
 Route::post('/login', [AdminController::class, 'authenticate']);
 Route::post('/logout', [AdminController::class, 'logout']);
 
-Route::get('/dashboard', [DashboardController::class,'index']);
+Route::get('/dashboard', [DashboardController::class,'index']); 
+Route::get('/news', [NewsController::class,'index']); 
+Route::get('/section', [SectionController::class,'index']); 
+Route::get('/gallery', [GalleryController::class,'index']); 
+Route::get('/ukm', [UKMController::class,'index']); 
+
