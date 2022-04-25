@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -21,11 +20,11 @@ class AdminController extends Controller
             'password' => 'required',
         ]);
 
-        if(Auth::guard('admin')->attempt($credentials)){
+        if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('/dashboard');
+            return redirect()->intended('/dashboard');
         }
-        return redirect('/login')->with('fail', 'Wrong username or password');
+        return back()->with('fail', 'Wrong username or password');
     }
 
     public function logout(Request $request)

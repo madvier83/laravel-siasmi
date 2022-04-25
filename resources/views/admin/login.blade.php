@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SIASMI Admin - Login</title>
+    <title>SIASMI - Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="SBAdmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -44,6 +44,11 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                             </form>
+                            @if(session()->has('fail'))
+                                <script>
+                                    alert("{{ session('fail') }}");
+                                </script>
+                            @endif
                         </div>
                     </div>
                 </div>

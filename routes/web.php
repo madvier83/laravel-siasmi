@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UKMController;
 use App\Http\Controllers\NewsController;
@@ -22,13 +23,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', [AdminController::class, 'index']);
-Route::post('/login', [AdminController::class, 'authenticate']);
-Route::post('/logout', [AdminController::class, 'logout']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AdminController::class, 'index'])->name('login');
+    Route::post('/login', [AdminController::class, 'authenticate']);
+});
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class,'index']);
 
-Route::get('/dashboard', [DashboardController::class,'index']); 
-Route::get('/news', [NewsController::class,'index']); 
-Route::get('/section', [SectionController::class,'index']); 
-Route::get('/gallery', [GalleryController::class,'index']); 
-Route::get('/ukm', [UKMController::class,'index']); 
+    Route::get('/section', [SectionController::class,'index']);
+
+    Route::get('/news', [NewsController::class,'index']);
+
+    Route::get('/gallery', [GalleryController::class,'index']);
+
+    Route::get('/ukm', [UKMController::class,'index']);
+    
+    Route::post('/logout', [AdminController::class, 'logout']);
+});
+
 

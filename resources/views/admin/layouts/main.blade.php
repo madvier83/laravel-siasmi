@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title></title>
+	<title>SIASMI - {{ $title }}</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="img/icon/stmik-mi.png"/>
