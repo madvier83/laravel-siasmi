@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SectionController extends Controller
 {
@@ -14,7 +16,8 @@ class SectionController extends Controller
     public function index()
     {
         return view('admin.section.index',[
-            'title' => 'Section',
+            'title' => 'Section / Section List',
+            'section' => Section::all()
         ]);
     }
 
@@ -58,7 +61,18 @@ class SectionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $section = Section::where('name', $id)->first();
+        if($section->type == 'contact'){
+            return view('admin.section.editContact',[
+                'title' => 'Section / '.$section->name,
+                'section' => $section,
+            ]);
+        } else {
+            return view('admin.section.edit',[
+                'title' => 'Section / '.$section->name,
+                'section' => $section,
+            ]);
+        }
     }
 
     /**
@@ -70,7 +84,20 @@ class SectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'image' => '',
+            'body' => 'required',
+        ]);
+
+        if($request->file('image')){
+            Storage::delete($request->oldImage);
+            $data['image'] = $request->file('image')->store('section-img');
+        }else{
+            $data['image'] = $request->oldImage;
+        }
+
+        Section::where('id',$id)->update($data);
+        return redirect('/admin-section')->with('update', 'Section updated!');
     }
 
     /**

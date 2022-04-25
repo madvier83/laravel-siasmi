@@ -23,8 +23,11 @@
 
 	<!-- Custom styles for this page -->
 	<link href="/SBAdmin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	
 	<link href="/trix/trix.css" rel="stylesheet">    
 	<script type="text/javascript" src="/trix/trix.js"></script>
+	
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 

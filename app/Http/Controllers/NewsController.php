@@ -29,7 +29,7 @@ class NewsController extends Controller
     public function create()
     {
         return view('admin.news.create',[
-            'title' => 'News'
+            'title' => 'News / Create'
         ]);
     }
 
@@ -52,7 +52,7 @@ class NewsController extends Controller
         }
 
         News::create($data);
-        return redirect('/admin-news');
+        return redirect('/admin-news')->with('create', 'The data is stored in a save place :)');
     }
 
     /**
@@ -75,7 +75,7 @@ class NewsController extends Controller
     public function edit($id)
     {
         return view('admin.news.edit',[
-            'title' => 'News',
+            'title' => 'News / Update',
             'news' => News::where('id', $id)->first(),
         ]);
     }
@@ -103,7 +103,7 @@ class NewsController extends Controller
         }
 
         News::where('id', $id)->update($data);
-        return redirect('/admin-news');
+        return redirect('/admin-news')->with('update', 'The data is successfully updated');
     }
 
     /**
@@ -116,6 +116,6 @@ class NewsController extends Controller
     {
         Storage::delete(News::where('id', $id)->first()->image);
         News::destroy($id);
-        return redirect('/admin-news');
+        return redirect('/admin-news')->with('delete', 'And the data will never be seen again..');
     }
 }

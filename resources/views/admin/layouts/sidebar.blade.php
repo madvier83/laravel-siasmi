@@ -25,10 +25,28 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-            <li class="nav-item {{ Request::is('admin-section') ? 'active' : '' }}">
-                <a class="nav-link" href="/admin-section">
+            <li class="nav-item {{ Request::is('admin-section*') ? 'active' : '' }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-align-left"></i>
-                    <span>Section</span></a>
+                    <span>Section</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/admin-section">Section List</a>
+                        <h6 class="collapse-header">Detail:</h6>
+                        <a class="collapse-item" href="admin-section/tentang">Tentang</a>
+                        <a class="collapse-item" href="admin-section/visi">Visi</a>
+                        <a class="collapse-item" href="admin-section/misi">Misi</a>
+                        <a class="collapse-item" href="admin-section/jurusan">Jurusan</a>
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Contact:</h6>
+                        <a class="collapse-item" href="admin-section/alamat">Alamat</a>
+                        <a class="collapse-item" href="admin-section/telpepon">Telepon</a>
+                        <a class="collapse-item" href="admin-section/email">Email</a>
+                        <a class="collapse-item" href="admin-section/whatsapp">Whatsapp</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item {{ Request::is('admin-news') ? 'active' : '' }}">
                 <a class="nav-link" href="/admin-news">

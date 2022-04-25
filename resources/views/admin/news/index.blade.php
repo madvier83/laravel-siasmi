@@ -31,7 +31,7 @@
                             <a href="/admin-news/{{ $n->id }}/update" class="btn btn-sm btn-success border-0 col-12 mb-2">Update</a>
                             <form action="/admin-news/{{ $n->id }}/delete" method="POST">
                                 @csrf
-                                <button class="btn btn-sm btn-danger border-0 col-12" onclick="return confirm('are you sure?')">Delete</button>
+                                <button class="btn btn-sm btn-danger border-0 col-12" onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
                         </td>
                     </tr>
@@ -42,4 +42,33 @@
         </div>
     </div>
 </div>
+
+@if(session('create'))
+<script>
+    Swal.fire(
+        'Success!',
+        '{{ session('create') }}',
+        'success'
+    );
+</script>
+@endif
+@if(session('update'))
+<script>
+    Swal.fire(
+        'Success!',
+        '{{ session('update') }}',
+        'success'
+    );
+</script>
+@endif
+@if(session('delete'))
+<script>
+    Swal.fire(
+        'Success!',
+        '{{ session('delete') }}',
+        'success'
+    );
+</script>
+@endif
+
 @endsection
