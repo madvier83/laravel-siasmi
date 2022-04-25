@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\News;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -42,9 +43,13 @@ class NewsController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'image' => 'required',
+            'image' => 'required|image|file|max:5000',
             'body' => 'required'
         ]);
+
+        if($request->file('image')){
+            $data['image'] = $request->file('image')->store('news-img');
+        }
 
         News::create($data);
         return redirect('/admin-news');
@@ -86,9 +91,16 @@ class NewsController extends Controller
     {
         $data = $request->validate([
             'title' => 'required',
-            'image' => 'required',
+            'image' => 'image|file|max:5000',
             'body' => 'required'
         ]);
+        
+        if($request->file('image')){
+            Storage::delete($request->oldImage);
+            $data['image'] = $request->file('image')->store('news-img');
+        }else{
+            $data['image'] = $request->oldImage;
+        }
 
         News::where('id', $id)->update($data);
         return redirect('/admin-news');
@@ -102,6 +114,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
+        Storage::delete(News::where('id', $id)->first()->image);
         News::destroy($id);
         return redirect('/admin-news');
     }

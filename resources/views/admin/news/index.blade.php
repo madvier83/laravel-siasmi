@@ -10,11 +10,11 @@
                 <thead>
                     <tr>
                         <th width="1%">No</th>
-                        <th>Judul</th>
-                        <th>Gambar</th>
-                        <th>Isi</th>
-                        <th>Tanggal</th>
-                        <th width="1">Aksi</th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th>Body</th>
+                        <th>Date</th>
+                        <th width="1">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,15 +23,15 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $n->title }}</td>
-                        <td><img src="" alt="" height="100px">{{ $n->image }}</td>
-                        <td>{{ $n->body }}</td>
+                        <td><img src="/storage/{{ $n->image }}" alt="{{ $n->image }}" style="width: 100px;max-height: 120px;overflow: hidden;"></td>
+                        <td class="small">{{ substr($n->body,0,250)}}...</td>
                         <td>{{ $n->created_at }}</td>
                         </td>
                         <td>
-                            <a href="/admin-news/{{ $n->id }}/update" class="badge btn-success col-12 mb-1">Update</a>
+                            <a href="/admin-news/{{ $n->id }}/update" class="btn btn-sm btn-success border-0 col-12 mb-2">Update</a>
                             <form action="/admin-news/{{ $n->id }}/delete" method="POST">
                                 @csrf
-                                <button class="badge btn-danger border-0 col-12" onclick="return confirm('are you sure?')">Delete</button>
+                                <button class="btn btn-sm btn-danger border-0 col-12" onclick="return confirm('are you sure?')">Delete</button>
                             </form>
                         </td>
                     </tr>
