@@ -16,9 +16,11 @@
 
     <!-- Custom styles for this template-->
     <link href="SBAdmin/css/sb-admin-2.min.css" rel="stylesheet">
+    
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
 
     <div class="container">
 
@@ -44,11 +46,6 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                             </form>
-                            @if(session()->has('fail'))
-                                <script>
-                                    alert("{{ session('fail') }}");
-                                </script>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -57,7 +54,32 @@
         </div>
 
     </div>
-
+    @if(session()->has('fail'))
+        <script>
+            let timerInterval
+            Swal.fire({
+            title: "{{ session('fail') }}",
+            html: 'Automatically closed in <b></b> ms.',
+            timer: 10000,
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading()
+                const b = Swal.getHtmlContainer().querySelector('b')
+                timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                }, 100)
+            },
+            willClose: () => {
+                clearInterval(timerInterval)
+            }
+            }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+                console.log('I was closed by the timer')
+            }
+            })
+        </script>
+    @endif
     <!-- Bootstrap core JavaScript-->
     <script src="SBAdmin/vendor/jquery/jquery.min.js"></script>
     <script src="SBAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
