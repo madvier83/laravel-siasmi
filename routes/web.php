@@ -27,18 +27,25 @@ Route::middleware(['guest'])->group(function () {
     Route::get('/login', [AdminController::class, 'index'])->name('login');
     Route::post('/login', [AdminController::class, 'authenticate']);
 });
+
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class,'index']);
-
-    Route::get('/section', [SectionController::class,'index']);
-
-    Route::get('/news', [NewsController::class,'index']);
-
-    Route::get('/gallery', [GalleryController::class,'index']);
-
-    Route::get('/ukm', [UKMController::class,'index']);
     
-    Route::post('/logout', [AdminController::class, 'logout']);
+    Route::get('admin-dashboard', [DashboardController::class,'index']);
+
+    Route::get('admin-section', [SectionController::class,'index']);
+
+    Route::get('admin-news', [NewsController::class,'index']);
+    Route::get('admin-news/create', [NewsController::class,'create']);
+    Route::post('admin-news/create', [NewsController::class,'store']);
+    Route::get('admin-news/{id}/update', [NewsController::class,'edit']);
+    Route::post('admin-news/{id}/update', [NewsController::class,'update']);
+    Route::post('admin-news/{id}/delete', [NewsController::class,'destroy']);
+
+    Route::get('admin-gallery', [GalleryController::class,'index']);
+
+    Route::get('admin-ukm', [UKMController::class,'index']);
+
+    Route::post('logout', [AdminController::class, 'logout']);
 });
 
 

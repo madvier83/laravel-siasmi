@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -15,6 +16,7 @@ class NewsController extends Controller
     {
         return view('admin.news.index',[
             'title' => 'News',
+            'news' => News::all()
         ]);
     }
 
@@ -25,7 +27,9 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.news.create',[
+            'title' => 'News'
+        ]);
     }
 
     /**
@@ -36,7 +40,14 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'image' => 'required',
+            'body' => 'required'
+        ]);
+
+        News::create($data);
+        return redirect('/admin-news');
     }
 
     /**
@@ -58,7 +69,10 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('admin.news.edit',[
+            'title' => 'News',
+            'news' => News::where('id', $id)->first(),
+        ]);
     }
 
     /**
@@ -70,7 +84,14 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'image' => 'required',
+            'body' => 'required'
+        ]);
+
+        News::where('id', $id)->update($data);
+        return redirect('/admin-news');
     }
 
     /**
@@ -81,6 +102,7 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        News::destroy($id);
+        return redirect('/admin-news');
     }
 }

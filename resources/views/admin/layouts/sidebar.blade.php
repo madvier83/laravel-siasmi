@@ -13,8 +13,8 @@
             <hr class="sidebar-divider my-0">
             
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/dashboard">
+            <li class="nav-item {{ Request::is('admin-dashboard') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin-dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -25,23 +25,23 @@
             <div class="sidebar-heading">
                 Interface
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="/section">
+            <li class="nav-item {{ Request::is('admin-section') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin-section">
                     <i class="fas fa-fw fa-align-left"></i>
                     <span>Section</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/news">
+            <li class="nav-item {{ Request::is('admin-news') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin-news">
                     <i class="fas fa-fw fa-newspaper"></i>
                     <span>News</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/gallery">
+            <li class="nav-item {{ Request::is('admin-gallery') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin-gallery">
                     <i class="fas fa-fw fa-image"></i>
                     <span>Gallery</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/ukm">
+            <li class="nav-item {{ Request::is('admin-ukm') ? 'active' : '' }}">
+                <a class="nav-link" href="/admin-ukm">
                     <i class="fas fa-fw fa-user"></i>
                     <span>UKM</span></a>
             </li>
@@ -54,7 +54,7 @@
             </div>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <form action="/logout" method="POST">
+                <form action="logout" method="POST">
                     @csrf
                     <button type="submit" class="nav-link bg-transparent border-0">
                         <i class="fas fa-sign-out-alt"></i>
@@ -88,8 +88,7 @@
 					<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
 						<span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrator</span>
-						<img class="img-profile rounded-circle"
-							src="http://localhost:8080/siasmi/assets/SBAdmin/img/undraw_profile.svg">
+						<img class="img-profile rounded-circle" src="http://localhost:8080/siasmi/assets/SBAdmin/img/undraw_profile.svg">
 					</a>
 				</li>
 			</ul>
