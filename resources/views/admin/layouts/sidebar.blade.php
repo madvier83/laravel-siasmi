@@ -42,7 +42,7 @@
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Contact:</h6>
                         <a class="collapse-item" href="admin-section/alamat">Alamat</a>
-                        <a class="collapse-item" href="admin-section/telpepon">Telepon</a>
+                        <a class="collapse-item" href="admin-section/telepon">Telepon</a>
                         <a class="collapse-item" href="admin-section/email">Email</a>
                         <a class="collapse-item" href="admin-section/whatsapp">Whatsapp</a>
                     </div>
